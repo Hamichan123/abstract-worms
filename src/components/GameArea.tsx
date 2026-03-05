@@ -42,6 +42,7 @@ export default function GameArea({ onExit }: { onExit: () => void }) {
     const eatAnimationRef = useRef<{ x: number; y: number; progress: number } | null>(null);
     const turnAnimationRef = useRef<number>(0);
     const lastDirectionVisualRef = useRef<Point>({ x: 0, y: -1 });
+    const accelerateHeldRef = useRef<boolean>(false);
     const previousSnakeRef = useRef<Point[]>([
         { x: 12, y: 10 },
         { x: 12, y: 11 },
@@ -324,11 +325,25 @@ export default function GameArea({ onExit }: { onExit: () => void }) {
                     e.preventDefault();
                     if (dir.x === 0) nextDirectionRef.current = { x: 1, y: 0 };
                     break;
+                case " ":
+                    e.preventDefault();
+                    accelerateHeldRef.current = true;
+                    break;
+            }
+        };
+
+        const handleKeyUp = (e: KeyboardEvent) => {
+            if (e.key === " ") {
+                accelerateHeldRef.current = false;
             }
         };
 
         window.addEventListener("keydown", handleKeyDown);
-        return () => window.removeEventListener("keydown", handleKeyDown);
+        window.addEventListener("keyup", handleKeyUp);
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+            window.removeEventListener("keyup", handleKeyUp);
+        };
     }, []);
 
     const spawnApple = (snake: Point[]) => {
@@ -383,7 +398,9 @@ export default function GameArea({ onExit }: { onExit: () => void }) {
 
         const snake = snakeRef.current;
 
-        const stepDuration = speedRef.current;
+        const stepDuration = accelerateHeldRef.current
+            ? Math.max(40, speedRef.current * 0.5)
+            : speedRef.current;
         const t = Math.min(1, Math.max(0, (time - lastUpdateRef.current) / stepDuration));
         const easedT = easeInOutSine(t);
 
@@ -456,7 +473,10 @@ export default function GameArea({ onExit }: { onExit: () => void }) {
     const update = (time: number) => {
         if (score >= WIN_SCORE) return; // Stop if won
 
-        if (time - lastUpdateRef.current > speedRef.current) {
+        const effectiveSpeed = accelerateHeldRef.current
+            ? Math.max(40, speedRef.current * 0.5)
+            : speedRef.current;
+        if (time - lastUpdateRef.current > effectiveSpeed) {
             const previousSnake = [...snakeRef.current];
             previousSnakeRef.current = previousSnake;
 
@@ -579,7 +599,22 @@ export default function GameArea({ onExit }: { onExit: () => void }) {
     }, [score]); // Restart anim loop dependency on score correctly (if it hit 20)
 
     return (
-        <div className="relative w-full h-screen bg-color-deep-purple-900 overflow-hidden text-color-foreground flex items-center justify-center">
+        <div className="relative w-full min-h-screen bg-color-deep-purple-900 overflow-hidden text-color-foreground flex">
+            {/* Instructions - left of game */}
+            <aside className="hidden lg:flex flex-col w-64 shrink-0 border-r border-white/10 bg-black/20 backdrop-blur-sm p-6 gap-4">
+                <h3 className="text-sm font-bold tracking-widest uppercase text-lime-300/90 border-b border-white/10 pb-2">
+                    How to play
+                </h3>
+                <ul className="space-y-3 text-xs text-slate-300 leading-relaxed">
+                    <li><span className="text-lime-400 font-medium">Steer</span> — W-A-S-D or Arrow keys</li>
+                    <li><span className="text-lime-400 font-medium">Speed up</span> — Hold Space</li>
+                    <li><span className="text-lime-400 font-medium">Goal</span> — Eat 20 apples to secure your WL spot</li>
+                    <li><span className="text-amber-400/90 font-medium">Avoid</span> — Walls and your own tail</li>
+                </ul>
+            </aside>
+
+            {/* Game area */}
+            <div className="relative flex-1 flex items-center justify-center min-h-screen">
             {/* UI Overlay */}
             <div className="absolute top-4 left-4 z-10 flex gap-4">
                 <button
@@ -598,7 +633,7 @@ export default function GameArea({ onExit }: { onExit: () => void }) {
                     />
                 </div>
                 <div className="pointer-events-none bg-black/50 px-6 py-1.5 rounded-full backdrop-blur-sm text-xs md:text-sm font-medium tracking-widest uppercase text-white shadow-lg">
-                    Use W-A-S-D or Arrows to Steer
+                    W-A-S-D or Arrows to steer · Hold Space to accelerate
                 </div>
             </div>
 
@@ -626,6 +661,7 @@ export default function GameArea({ onExit }: { onExit: () => void }) {
                     setScore(0);
                 }} onExit={onExit} />
             )}
+            </div>
         </div>
     );
 }

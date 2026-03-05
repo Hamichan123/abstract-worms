@@ -218,7 +218,7 @@ export default function WaitlistModal({
                                     <CheckCircle2 className="w-20 h-20 text-color-lime-green drop-shadow-[0_0_15px_rgba(163,230,53,0.5)]" />
                                 </div>
                                 <h2 className="text-3xl font-extrabold text-white mb-3 tracking-tight">
-                                    WL Locked 🪱🎉
+                                    Wormlist secured 🎉
                                 </h2>
                                 <p className="text-color-cyan-accent font-medium mb-8">
                                     Your Abstract Worms whitelist spot is secured. Keep an eye on X for the next
