@@ -1,0 +1,110 @@
+.nebula-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle at 0% 0%, #1d2145 0, transparent 55%),
+    radial-gradient(circle at 100% 0%, #221b4a 0, transparent 55%),
+    radial-gradient(circle at 30% 100%, #06223c 0, transparent 55%), #020617;
+  background-size: 160% 160%;
+  animation: nebulaShift 18s ease-in-out infinite alternate;
+  overflow: hidden;
+}
+
+.nebula-layer {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(circle at 10% 20%, rgba(129, 140, 248, 0.35), transparent 55%),
+    radial-gradient(circle at 80% 60%, rgba(16, 185, 129, 0.3), transparent 55%),
+    radial-gradient(circle at 40% 100%, rgba(56, 189, 248, 0.25), transparent 60%);
+  mix-blend-mode: screen;
+  filter: blur(40px);
+  opacity: 0.65;
+  animation: nebulaMorph 26s ease-in-out infinite alternate;
+}
+
+.star-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  border-radius: 999px;
+  background: radial-gradient(circle, #e5f0ff 0, rgba(248, 250, 252, 0.75) 25%, transparent 70%);
+  animation-name: starDrift, starTwinkle;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+.hero-title-char {
+  display: inline-block;
+  will-change: transform, opacity, text-shadow;
+}
+
+.btn-orbit-ring {
+  position: absolute;
+  inset: 2px;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.btn-orbit-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: radial-gradient(circle, #f9fafb 0, #a3e635 45%, rgba(34, 197, 94, 0.3) 80%);
+  box-shadow: 0 0 16px rgba(132, 204, 22, 0.9);
+}
+
+@keyframes nebulaShift {
+  0% {
+    transform: translate3d(0, 0, 0);
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    transform: translate3d(-12px, -8px, 0) scale(1.03);
+    filter: hue-rotate(18deg);
+  }
+  100% {
+    transform: translate3d(18px, 14px, 0) scale(1.02);
+    filter: hue-rotate(-12deg);
+  }
+}
+
+@keyframes nebulaMorph {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate3d(-12px, 8px, 0) scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate3d(10px, -10px, 0) scale(0.98);
+    opacity: 0.5;
+  }
+}
+
+@keyframes starDrift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-40px, -120px, 0);
+  }
+}
+
+@keyframes starTwinkle {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
