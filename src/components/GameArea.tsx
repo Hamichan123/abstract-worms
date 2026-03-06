@@ -48,6 +48,53 @@ export default function GameArea({ onExit }: { onExit: () => void }) {
         { x: 12, y: 11 },
         { x: 12, y: 12 }
     ]);
+    const audioContextRef = useRef<AudioContext | null>(null);
+
+    const playEatSound = () => {
+        try {
+            if (!audioContextRef.current) {
+                audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+            }
+            const ctx = audioContextRef.current;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.frequency.setValueAtTime(440, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(660, ctx.currentTime + 0.05);
+            osc.type = "sine";
+            gain.gain.setValueAtTime(0.15, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.12);
+            osc.start(ctx.currentTime);
+            osc.stop(ctx.currentTime + 0.12);
+        } catch (_) {}
+    };
+
+    const playVictorySound = () => {
+        try {
+            if (!audioContextRef.current) {
+                audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+            }
+            const ctx = audioContextRef.current;
+            const now = ctx.currentTime;
+            const notes = [523.25, 659.25, 783.99, 1046.5]; // C5 E5 G5 C6
+            notes.forEach((freq, i) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.frequency.setValueAtTime(freq, now);
+                osc.type = "sine";
+                const start = now + i * 0.12;
+                const end = start + 0.2;
+                gain.gain.setValueAtTime(0, start);
+                gain.gain.linearRampToValueAtTime(0.12, start + 0.02);
+                gain.gain.exponentialRampToValueAtTime(0.01, end);
+                osc.start(start);
+                osc.stop(end);
+            });
+        } catch (_) {}
+    };
 
     // Initialize image once
     useEffect(() => {
@@ -550,7 +597,12 @@ export default function GameArea({ onExit }: { onExit: () => void }) {
 
             // Apple Collision
             if (newHead.x === appleRef.current.x && newHead.y === appleRef.current.y) {
-                setScore(s => s + 1);
+                setScore(s => {
+                    const next = s + 1;
+                    if (next >= WIN_SCORE) playVictorySound();
+                    return next;
+                });
+                playEatSound();
 
                 const appleGridX = appleRef.current.x;
                 const appleGridY = appleRef.current.y;
