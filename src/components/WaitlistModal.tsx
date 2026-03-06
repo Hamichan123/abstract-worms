@@ -22,7 +22,7 @@ export default function WaitlistModal({
 
     // Pre-fill tweet intent
     const tweetText = encodeURIComponent(
-        "I just ate 20 items and secured @AbstractWorms waitlist! 🐛👑\n\n#AbstractWorms #Web3Gaming"
+        "I just ate 20 items and secured @AbstractWorms waitlist! 🐛👑\n\nTry your luck here: https://abstractworms.xyz/\n\n#AbstractWorms #Web3Gaming"
     );
     const tweetUrl = `https://twitter.com/intent/tweet?text=${tweetText}`;
 
