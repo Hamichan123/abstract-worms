@@ -21,7 +21,7 @@ type Particle = {
 export default function GameArea({ onExit }: { onExit: () => void }) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [score, setScore] = useState(0);
-    const WIN_SCORE = 20;
+    const WIN_SCORE = 10;
 
     // Game state refs (to avoid relying on React re-renders in the loop)
     const snakeRef = useRef<Point[]>([
@@ -32,7 +32,7 @@ export default function GameArea({ onExit }: { onExit: () => void }) {
     const directionRef = useRef<Point>({ x: 0, y: -1 }); // Default moving UP
     const nextDirectionRef = useRef<Point>({ x: 0, y: -1 });
     const appleRef = useRef<Point>({ x: 5, y: 5 });
-    const speedRef = useRef<number>(180); // ms per step
+    const speedRef = useRef<number>(220); // ms per step (higher = slower)
 
     const lastUpdateRef = useRef<number>(0);
     const requestRef = useRef<number>(0);
@@ -399,7 +399,7 @@ export default function GameArea({ onExit }: { onExit: () => void }) {
         const snake = snakeRef.current;
 
         const stepDuration = accelerateHeldRef.current
-            ? Math.max(40, speedRef.current * 0.5)
+            ? Math.max(70, speedRef.current * 0.55)
             : speedRef.current;
         const t = Math.min(1, Math.max(0, (time - lastUpdateRef.current) / stepDuration));
         const easedT = easeInOutSine(t);
@@ -474,7 +474,7 @@ export default function GameArea({ onExit }: { onExit: () => void }) {
         if (score >= WIN_SCORE) return; // Stop if won
 
         const effectiveSpeed = accelerateHeldRef.current
-            ? Math.max(40, speedRef.current * 0.5)
+            ? Math.max(70, speedRef.current * 0.55)
             : speedRef.current;
         if (time - lastUpdateRef.current > effectiveSpeed) {
             const previousSnake = [...snakeRef.current];
@@ -575,8 +575,8 @@ export default function GameArea({ onExit }: { onExit: () => void }) {
                 eatAnimationRef.current = { x: appleGridX, y: appleGridY, progress: 0 };
 
                 spawnApple(newSnake);
-                // Slightly increase speed
-                speedRef.current = Math.max(50, speedRef.current - 5);
+                // Increase speed by 20% per apple (20 per 100)
+                speedRef.current = Math.max(90, speedRef.current * 0.8);
             } else {
                 newSnake.pop(); // Remove tail
             }
@@ -608,7 +608,7 @@ export default function GameArea({ onExit }: { onExit: () => void }) {
                 <ul className="space-y-3 text-xs text-slate-300 leading-relaxed">
                     <li><span className="text-lime-400 font-medium">Steer</span> — W-A-S-D or Arrow keys</li>
                     <li><span className="text-lime-400 font-medium">Speed up</span> — Hold Space</li>
-                    <li><span className="text-lime-400 font-medium">Goal</span> — Eat 20 apples to secure your WL spot</li>
+                    <li><span className="text-lime-400 font-medium">Goal</span> — Eat 10 apples to secure your WL spot</li>
                     <li><span className="text-amber-400/90 font-medium">Avoid</span> — Walls and your own tail</li>
                 </ul>
             </aside>
@@ -657,7 +657,7 @@ export default function GameArea({ onExit }: { onExit: () => void }) {
                     ];
                     directionRef.current = { x: 0, y: -1 };
                     nextDirectionRef.current = { x: 0, y: -1 };
-                    speedRef.current = 180;
+                    speedRef.current = 220;
                     setScore(0);
                 }} onExit={onExit} />
             )}
