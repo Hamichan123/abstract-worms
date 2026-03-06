@@ -87,6 +87,7 @@ export default function WaitlistModal({
                     data: [
                         {
                             // Map existing form fields to Google Sheet columns
+                            timestamp: new Date().toISOString(),
                             twitter_handle: formData.xUsername,
                             tweet_url: formData.xLink,
                             wallet: formData.wallet
