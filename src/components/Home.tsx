@@ -195,7 +195,7 @@ export default function Home({ sneakPeeks = [] }: { sneakPeeks: SneakPeek[] }) {
 
               <div className="text-[11px] md:text-xs text-slate-400/80">
                 <p className="font-medium uppercase tracking-[0.22em]">
-                  20 items eaten = guaranteed spot
+                  10 items eaten = guaranteed spot
                 </p>
                 <p className="mt-1 text-slate-500">
                   Keyboard only • No gas • Limited season drop

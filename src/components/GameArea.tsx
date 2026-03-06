@@ -596,7 +596,7 @@ export default function GameArea({ onExit }: { onExit: () => void }) {
     useEffect(() => {
         requestRef.current = requestAnimationFrame(update);
         return () => cancelAnimationFrame(requestRef.current!);
-    }, [score]); // Restart anim loop dependency on score correctly (if it hit 20)
+    }, [score]); // Restart anim loop dependency on score correctly (if it hit 10)
 
     return (
         <div className="relative w-full min-h-screen bg-color-deep-purple-900 overflow-hidden text-color-foreground flex">
