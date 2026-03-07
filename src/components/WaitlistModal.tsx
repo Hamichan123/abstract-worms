@@ -26,7 +26,7 @@ export default function WaitlistModal({
     const tweetText = encodeURIComponent(
         "I just ate 10 items and secured @AbstractWorms waitlist! 🐛👑\n\nTry your luck here: https://abstractworms.xyz/\n\n#AbstractWorms #Web3Gaming"
     );
-    const tweetUrl = `https://twitter.com/intent/tweet?text=${tweetText}`;
+    const tweetUrl = `https://x.com/intent/tweet?text=${tweetText}&in_reply_to=2029711108232110256`;
 
     // Load canvas-confetti via CDN once on the client
     useEffect(() => {
