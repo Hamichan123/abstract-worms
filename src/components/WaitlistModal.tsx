@@ -19,6 +19,8 @@ export default function WaitlistModal({
         xUsername: "",
         wallet: ""
     });
+    const [captcha, setCaptcha] = useState<{ a: number; b: number; answer: number } | null>(null);
+    const [captchaInput, setCaptchaInput] = useState("");
 
     // Pre-fill tweet intent
     const tweetText = encodeURIComponent(
@@ -40,6 +42,17 @@ export default function WaitlistModal({
         return () => {
             // Keep script for subsequent opens; no cleanup needed
         };
+    }, []);
+
+    const generateCaptcha = () => {
+        const a = 1 + Math.floor(Math.random() * 9);
+        const b = 1 + Math.floor(Math.random() * 9);
+        setCaptcha({ a, b, answer: a + b });
+        setCaptchaInput("");
+    };
+
+    useEffect(() => {
+        generateCaptcha();
     }, []);
 
     const triggerConfetti = () => {
@@ -75,6 +88,24 @@ export default function WaitlistModal({
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setErrorMessage(null);
+
+        if (!captcha) {
+            generateCaptcha();
+            setErrorMessage("Please solve the captcha and try again.");
+            setIsShaking(true);
+            setTimeout(() => setIsShaking(false), 400);
+            return;
+        }
+
+        const userAnswer = parseInt(captchaInput.trim(), 10);
+        if (Number.isNaN(userAnswer) || userAnswer !== captcha.answer) {
+            setErrorMessage("Captcha answer is incorrect. Please try again.");
+            setIsShaking(true);
+            setTimeout(() => setIsShaking(false), 400);
+            generateCaptcha();
+            return;
+        }
+
         setIsSubmitting(true);
 
         try {
@@ -196,6 +227,28 @@ export default function WaitlistModal({
                                             }
                                         />
                                     </div>
+
+                                    {captcha && (
+                                        <div>
+                                            <label className="block text-sm font-semibold text-white/80 mb-1 ml-1">
+                                                Human check
+                                            </label>
+                                            <div className="flex items-center gap-3">
+                                                <span className="text-sm text-white/70">
+                                                    What is {captcha.a} + {captcha.b}?
+                                                </span>
+                                                <input
+                                                    required
+                                                    type="text"
+                                                    inputMode="numeric"
+                                                    pattern="[0-9]*"
+                                                    className="w-20 bg-color-deep-purple-900/50 border border-white/10 rounded-xl px-3 py-2 text-white placeholder-white/30 focus:outline-none focus:border-color-lime-green focus:ring-1 focus:ring-color-lime-green transition-all text-center"
+                                                    value={captchaInput}
+                                                    onChange={(e) => setCaptchaInput(e.target.value)}
+                                                />
+                                            </div>
+                                        </div>
+                                    )}
 
                                     {errorMessage && (
                                         <p className="text-sm text-red-300 font-medium mt-2">
