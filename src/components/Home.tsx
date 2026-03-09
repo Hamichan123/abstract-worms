@@ -142,8 +142,8 @@ export default function Home({ sneakPeeks = [] }: { sneakPeeks: SneakPeek[] }) {
         <div className="relative flex flex-col md:flex-row items-center md:items-stretch gap-10 md:gap-14 px-6 md:px-10 py-10 md:py-14">
           {/* Left: Title + copy + CTA */}
           <div className="flex-1 text-center md:text-left space-y-6 md:space-y-8">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] uppercase tracking-[0.25em] text-slate-300/80">
-              Whitelist Unlocked -- Grab Your WL Spot Now!
+            <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-[11px] uppercase tracking-[0.25em] text-amber-300/90">
+              Game context ended
             </div>
 
             <div className="space-y-4">
@@ -160,8 +160,8 @@ export default function Home({ sneakPeeks = [] }: { sneakPeeks: SneakPeek[] }) {
               </h1>
 
               <p className="text-sm md:text-base lg:text-lg font-medium text-[#94A3B8] max-w-md md:max-w-lg mx-auto md:mx-0">
-                Zoom zoom through glowing grids, Eat combos like a chonky champ, and snag
-                guaranteed wormlist before the snack party ends! 🎉🍎
+                The play-to-WL game context has ended. You can still play the arcade and explore
+                the Abstract Worms collection. Stay tuned for future drops. 🎉🍎
               </p>
             </div>
 
@@ -189,16 +189,16 @@ export default function Home({ sneakPeeks = [] }: { sneakPeeks: SneakPeek[] }) {
 
                 <Play className="relative w-4 h-4 md:w-5 md:h-5 fill-slate-900" />
                 <span className="relative uppercase tracking-[0.24em]">
-                  Play to get WL
+                  Play Arcade
                 </span>
               </button>
 
               <div className="text-[11px] md:text-xs text-slate-400/80">
                 <p className="font-medium uppercase tracking-[0.22em]">
-                  10 items eaten = guaranteed spot
+                  Game context ended — play for fun
                 </p>
                 <p className="mt-1 text-slate-500">
-                  Keyboard only • No gas • Limited season drop
+                  Keyboard only • No gas
                 </p>
               </div>
             </div>
@@ -223,7 +223,7 @@ export default function Home({ sneakPeeks = [] }: { sneakPeeks: SneakPeek[] }) {
         {[
           {
             title: "Play-to-WL",
-            body: "Play arcade → Earn score → Lock WL spot. Keyboard only - No gas forever 🪱",
+            body: "Game context ended. Play arcade for fun. Keyboard only - No gas forever 🪱",
           },
           {
             title: "Worm Squad",
@@ -316,8 +316,8 @@ export default function Home({ sneakPeeks = [] }: { sneakPeeks: SneakPeek[] }) {
           Drop into the Grid
         </h2>
         <p className="text-sm md:text-base text-slate-200/85 max-w-2xl mx-auto mb-6">
-          Hit play, dodge yourself, and crown your worm. The deeper your run, the closer you are
-          to the front of the Abstract Worms drop.
+          Game context has ended. You can still hit play, dodge yourself, and crown your worm — or
+          explore the galerie and stay tuned for the next Abstract Worms drop.
         </p>
         <button
           onClick={() => setGameState("playing")}

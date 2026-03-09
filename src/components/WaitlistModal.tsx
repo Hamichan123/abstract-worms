@@ -158,11 +158,14 @@ export default function WaitlistModal({
                         {!isSubmitted ? (
                             <>
                                 <div className="text-center mb-6">
+                                    <p className="text-amber-300/90 text-sm font-medium mb-2 uppercase tracking-wider">
+                                        Game context ended
+                                    </p>
                                     <h2 className="text-3xl font-extrabold text-white mb-2 tracking-tight">
                                         Victory! 👑
                                     </h2>
                                     <p className="text-color-cyan-accent font-medium">
-                                        You've earned your spot! Share your achievement to join the waitlist.
+                                        You hit 10 apples! The WL signup period has ended — you can still share your run or play again for fun.
                                     </p>
                                 </div>
 
@@ -272,11 +275,10 @@ export default function WaitlistModal({
                                     <CheckCircle2 className="w-20 h-20 text-color-lime-green drop-shadow-[0_0_15px_rgba(163,230,53,0.5)]" />
                                 </div>
                                 <h2 className="text-3xl font-extrabold text-white mb-3 tracking-tight">
-                                    Wormlist secured 🎉
+                                    Thanks! 🎉
                                 </h2>
                                 <p className="text-color-cyan-accent font-medium mb-8">
-                                    Your Abstract Worms whitelist spot is secured. Keep an eye on X for the next
-                                    drops and updates.
+                                    Game context has ended. Keep an eye on X for the next Abstract Worms drops and updates.
                                 </p>
 
                                 <div className="flex gap-4">

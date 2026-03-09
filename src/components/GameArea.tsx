@@ -660,7 +660,7 @@ export default function GameArea({ onExit }: { onExit: () => void }) {
                 <ul className="space-y-3 text-xs text-slate-300 leading-relaxed">
                     <li><span className="text-lime-400 font-medium">Steer</span> — W-A-S-D or Arrow keys</li>
                     <li><span className="text-lime-400 font-medium">Speed up</span> — Hold Space</li>
-                    <li><span className="text-lime-400 font-medium">Goal</span> — Eat 10 apples to secure your WL spot</li>
+                    <li><span className="text-lime-400 font-medium">Goal</span> — Eat 10 apples (game context ended — play for fun)</li>
                     <li><span className="text-amber-400/90 font-medium">Avoid</span> — Walls and your own tail</li>
                 </ul>
             </aside>
