@@ -109,7 +109,7 @@ export default function WaitlistModal({
         setIsSubmitting(true);
 
         try {
-            const response = await fetch("https://sheetdb.io/api/v1/pdomh1fjv7r6t", {
+            const response = await fetch("https://sheetdb.io/api/v1/kbtyn89ros6ja", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -146,9 +146,8 @@ export default function WaitlistModal({
         <>
             <div className="absolute inset-0 z-50 flex items-center justify-center p-4 bg-color-deep-purple-900/80 backdrop-blur-xl animate-in fade-in duration-500">
                 <div
-                    className={`w-full max-w-md bg-color-deep-purple-800/90 border border-color-cyan-accent/40 rounded-3xl p-8 shadow-[0_0_50px_rgba(34,211,238,0.15)] relative overflow-hidden ${
-                        isShaking ? "aw-modal-shake" : ""
-                    }`}
+                    className={`w-full max-w-md bg-color-deep-purple-800/90 border border-color-cyan-accent/40 rounded-3xl p-8 shadow-[0_0_50px_rgba(34,211,238,0.15)] relative overflow-hidden ${isShaking ? "aw-modal-shake" : ""
+                        }`}
                 >
                     {/* Glow Effects */}
                     <div className="absolute top-[-20%] left-[-20%] w-[50%] h-[50%] bg-color-cyan-accent opacity-20 blur-[60px] rounded-full pointer-events-none" />

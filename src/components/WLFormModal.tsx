@@ -107,7 +107,7 @@ export default function WLFormModal({
 
         try {
             // Using the new SheetDB endpoint for the WL Form
-            const response = await fetch("https://sheetdb.io/api/v1/za09p4vw702fc", {
+            const response = await fetch("https://sheetdb.io/api/v1/kbtyn89ros6ja", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
