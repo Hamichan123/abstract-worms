@@ -9,6 +9,7 @@ import GameArea from "@/components/GameArea";
 import AnimatedWorm from "@/components/AnimatedWorm";
 import { createStarField } from "@/utils/particles";
 import type { SneakPeek } from "@/lib/sneakPeeks";
+import WLFormModal from "@/components/WLFormModal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,6 +21,7 @@ const PLACEHOLDER_GRADIENTS = [
 
 export default function Home({ sneakPeeks = [] }: { sneakPeeks: SneakPeek[] }) {
   const [gameState, setGameState] = useState<"lobby" | "playing">("lobby");
+  const [isWLFormOpen, setIsWLFormOpen] = useState(false);
   const heroTitleRef = useRef<HTMLHeadingElement | null>(null);
   const heroRef = useRef<HTMLDivElement | null>(null);
   const featuresRef = useRef<HTMLDivElement | null>(null);
@@ -166,6 +168,13 @@ export default function Home({ sneakPeeks = [] }: { sneakPeeks: SneakPeek[] }) {
             </div>
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 md:gap-6 pt-2">
+              <button
+                onClick={() => setIsWLFormOpen(true)}
+                className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 text-sm md:text-base font-bold tracking-wide rounded-full bg-slate-900 border-2 border-lime-300 text-lime-300 shadow-[0_0_20px_rgba(132,204,22,0.4)] transition-all duration-200 hover:scale-110 hover:shadow-[0_0_40px_rgba(132,204,22,0.6)] hover:bg-lime-900/30 active:scale-95 uppercase"
+              >
+                Apply to WL
+              </button>
+
               <button
                 onClick={() => setGameState("playing")}
                 className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 text-sm md:text-base font-semibold tracking-wide rounded-full bg-gradient-to-r from-lime-300 via-emerald-300 to-cyan-300 text-slate-900 shadow-[0_0_45px_rgba(74,222,128,0.7)] transition-all duration-200 hover:scale-110 hover:shadow-[0_0_80px_rgba(74,222,128,0.95)] active:scale-95 overflow-hidden"
@@ -329,6 +338,8 @@ export default function Home({ sneakPeeks = [] }: { sneakPeeks: SneakPeek[] }) {
           </span>
         </button>
       </section>
+
+      {isWLFormOpen && <WLFormModal onClose={() => setIsWLFormOpen(false)} />}
     </main>
   );
 }
