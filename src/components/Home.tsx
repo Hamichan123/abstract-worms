@@ -167,17 +167,17 @@ export default function Home({ sneakPeeks = [] }: { sneakPeeks: SneakPeek[] }) {
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4 md:gap-6 pt-2">
+            <div className="flex flex-wrap sm:flex-row sm:items-center gap-4 md:gap-6 pt-2">
               <button
                 onClick={() => setIsWLFormOpen(true)}
-                className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 text-sm md:text-base font-bold tracking-wide rounded-full bg-slate-900 border-2 border-lime-300 text-lime-300 shadow-[0_0_20px_rgba(132,204,22,0.4)] transition-all duration-200 hover:scale-110 hover:shadow-[0_0_40px_rgba(132,204,22,0.6)] hover:bg-lime-900/30 active:scale-95 uppercase"
+                className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 text-sm md:text-base font-bold tracking-wide rounded-full bg-slate-900 border border-lime-300 text-lime-300 shadow-[0_0_20px_rgba(132,204,22,0.4)] transition-all duration-200 hover:scale-105 hover:shadow-[0_0_40px_rgba(132,204,22,0.6)] hover:bg-lime-900/30 active:scale-95 uppercase whitespace-nowrap shrink-0"
               >
                 Apply to WL
               </button>
 
               <button
                 onClick={() => setGameState("playing")}
-                className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 text-sm md:text-base font-semibold tracking-wide rounded-full bg-gradient-to-r from-lime-300 via-emerald-300 to-cyan-300 text-slate-900 shadow-[0_0_45px_rgba(74,222,128,0.7)] transition-all duration-200 hover:scale-110 hover:shadow-[0_0_80px_rgba(74,222,128,0.95)] active:scale-95 overflow-hidden"
+                className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 text-sm md:text-base font-semibold tracking-wide rounded-full bg-gradient-to-r from-lime-300 via-emerald-300 to-cyan-300 text-slate-900 shadow-[0_0_45px_rgba(74,222,128,0.7)] transition-all duration-200 hover:scale-105 hover:shadow-[0_0_80px_rgba(74,222,128,0.95)] active:scale-95 overflow-hidden whitespace-nowrap shrink-0"
               >
                 <span className="absolute inset-0 bg-gradient-to-r from-white/40 via-transparent to-white/40 opacity-40" />
                 <span className="pointer-events-none absolute inset-y-0 left-[-30%] w-1/3 bg-gradient-to-r from-white/40 via-white/80 to-transparent translate-x-[-120%] group-hover:animate-[sweep_1.4s_ease-out_forwards] animate-[sweep_3s_ease-out_infinite]" />
