@@ -116,8 +116,8 @@ export default function WLFormModal({
                     data: [
                         {
                             timestamp: new Date().toISOString(),
-                            username: formData.xUsername,
-                            "tweet link": formData.xCommentLink,
+                            xusername: formData.xUsername,
+                            tweet: formData.xCommentLink,
                             wallet: formData.wallet
                         }
                     ]
