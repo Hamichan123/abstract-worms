@@ -181,7 +181,7 @@ export default function WLFormModal({
                                                     You must visit our official tweet to Like, Retweet, and Comment before you can fill out this form.
                                                 </p>
                                                 <a
-                                                    href="https://x.com/AbstractWorms/status/2030807380284289070?s=20"
+                                                    href="https://x.com/AbstractWorms/status/2031608713165799441?s=20"
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                     onClick={() => setIsUnlocked(true)}
