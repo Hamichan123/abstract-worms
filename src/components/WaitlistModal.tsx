@@ -109,10 +109,11 @@ export default function WaitlistModal({
         setIsSubmitting(true);
 
         try {
-            const response = await fetch("https://sheetdb.io/api/v1/kbtyn89ros6ja", {
+            await fetch("https://script.google.com/macros/s/AKfycbx492ZZdL-92SZeiqS87zSQVm1K453Pe6z-N-4wgcDpsxohVaZPP7y3z65ZJMM_kS09/exec", {
                 method: "POST",
+                mode: "no-cors",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "text/plain",
                 },
                 body: JSON.stringify({
                     data: [
@@ -126,10 +127,6 @@ export default function WaitlistModal({
                     ]
                 })
             });
-
-            if (!response.ok) {
-                throw new Error("SheetDB error");
-            }
 
             setIsSubmitted(true);
             triggerConfetti();
