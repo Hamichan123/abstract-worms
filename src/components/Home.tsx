@@ -9,7 +9,6 @@ import GameArea from "@/components/GameArea";
 import AnimatedWorm from "@/components/AnimatedWorm";
 import { createStarField } from "@/utils/particles";
 import type { SneakPeek } from "@/lib/sneakPeeks";
-import WLFormModal from "@/components/WLFormModal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,7 +20,6 @@ const PLACEHOLDER_GRADIENTS = [
 
 export default function Home({ sneakPeeks = [] }: { sneakPeeks: SneakPeek[] }) {
   const [gameState, setGameState] = useState<"lobby" | "playing">("lobby");
-  const [isWLFormOpen, setIsWLFormOpen] = useState(false);
   const heroTitleRef = useRef<HTMLHeadingElement | null>(null);
   const heroRef = useRef<HTMLDivElement | null>(null);
   const featuresRef = useRef<HTMLDivElement | null>(null);
@@ -163,17 +161,19 @@ export default function Home({ sneakPeeks = [] }: { sneakPeeks: SneakPeek[] }) {
 
               <p className="text-sm md:text-base lg:text-lg font-medium text-[#94A3B8] max-w-md md:max-w-lg mx-auto md:mx-0">
                 The play-to-WL game context has ended. You can still play the arcade and explore
-                the Abstract Worms collection. Stay tuned for future drops. 🎉🍎
+                the Abstract Worms collection on OpenSea. 🎉🍎
               </p>
             </div>
 
             <div className="flex flex-wrap sm:flex-row sm:items-center gap-4 md:gap-6 pt-2">
-              <button
-                onClick={() => setIsWLFormOpen(true)}
+              <a
+                href="https://opensea.io/collection/abstractworms/overview"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 text-sm md:text-base font-bold tracking-wide rounded-full bg-slate-900 border border-lime-300 text-lime-300 shadow-[0_0_20px_rgba(132,204,22,0.4)] transition-all duration-200 hover:scale-105 hover:shadow-[0_0_40px_rgba(132,204,22,0.6)] hover:bg-lime-900/30 active:scale-95 uppercase whitespace-nowrap shrink-0"
               >
-                Apply to WL
-              </button>
+                View Collection
+              </a>
 
               <button
                 onClick={() => setGameState("playing")}
@@ -339,7 +339,6 @@ export default function Home({ sneakPeeks = [] }: { sneakPeeks: SneakPeek[] }) {
         </button>
       </section>
 
-      {isWLFormOpen && <WLFormModal onClose={() => setIsWLFormOpen(false)} />}
     </main>
   );
 }

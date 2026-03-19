@@ -164,106 +164,31 @@ export default function WaitlistModal({
                                         You hit 10 apples! The WL signup period has ended — you can still share your run or play again for fun.
                                     </p>
                                 </div>
-
                                 <a
-                                    href={tweetUrl}
+                                    href="https://opensea.io/collection/abstractworms/overview"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-[#1DA1F2] hover:bg-[#1a8cd8] text-white rounded-xl font-bold transition-all shadow-lg hover:shadow-[#1DA1F2]/50 hover:-translate-y-1 mb-6"
+                                    className="w-full flex items-center justify-center gap-2 py-4 px-4 bg-color-cyan-accent hover:bg-cyan-400 text-color-deep-purple-900 rounded-xl font-extrabold transition-all shadow-lg hover:shadow-cyan-400/50 hover:-translate-y-1 mb-6 text-center uppercase tracking-wider"
                                 >
-                                    <Twitter className="w-5 h-5 fill-current" />
-                                    Tweet Achievement
+                                    View Collection on OpenSea
                                 </a>
 
-                                <form onSubmit={handleSubmit} className="space-y-4">
-                                    <div>
-                                        <label className="block text-sm font-semibold text-white/80 mb-1 ml-1">
-                                            Twitter (X) Post Link
-                                        </label>
-                                        <input
-                                            required
-                                            type="url"
-                                            placeholder="https://x.com/..."
-                                            className="w-full bg-color-deep-purple-900/50 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-color-lime-green focus:ring-1 focus:ring-color-lime-green transition-all"
-                                            value={formData.xLink}
-                                            onChange={(e) =>
-                                                setFormData({ ...formData, xLink: e.target.value })
-                                            }
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <label className="block text-sm font-semibold text-white/80 mb-1 ml-1">
-                                            X Username
-                                        </label>
-                                        <input
-                                            required
-                                            type="text"
-                                            placeholder="@username"
-                                            className="w-full bg-color-deep-purple-900/50 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-color-lime-green focus:ring-1 focus:ring-color-lime-green transition-all"
-                                            value={formData.xUsername}
-                                            onChange={(e) =>
-                                                setFormData({
-                                                    ...formData,
-                                                    xUsername: e.target.value
-                                                })
-                                            }
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <label className="block text-sm font-semibold text-white/80 mb-1 ml-1">
-                                            Crypto Wallet Address
-                                        </label>
-                                        <input
-                                            required
-                                            type="text"
-                                            placeholder="0x..."
-                                            className="w-full bg-color-deep-purple-900/50 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-color-lime-green focus:ring-1 focus:ring-color-lime-green transition-all"
-                                            value={formData.wallet}
-                                            onChange={(e) =>
-                                                setFormData({ ...formData, wallet: e.target.value })
-                                            }
-                                        />
-                                    </div>
-
-                                    {captcha && (
-                                        <div>
-                                            <label className="block text-sm font-semibold text-white/80 mb-1 ml-1">
-                                                Human check
-                                            </label>
-                                            <div className="flex items-center gap-3">
-                                                <span className="text-sm text-white/70">
-                                                    What is {captcha.a} + {captcha.b}?
-                                                </span>
-                                                <input
-                                                    required
-                                                    type="text"
-                                                    inputMode="numeric"
-                                                    pattern="[0-9]*"
-                                                    className="w-20 bg-color-deep-purple-900/50 border border-white/10 rounded-xl px-3 py-2 text-white placeholder-white/30 focus:outline-none focus:border-color-lime-green focus:ring-1 focus:ring-color-lime-green transition-all text-center"
-                                                    value={captchaInput}
-                                                    onChange={(e) => setCaptchaInput(e.target.value)}
-                                                />
-                                            </div>
-                                        </div>
-                                    )}
-
-                                    {errorMessage && (
-                                        <p className="text-sm text-red-300 font-medium mt-2">
-                                            {errorMessage}
-                                        </p>
-                                    )}
-
+                                <div className="space-y-4 pt-2">
                                     <button
-                                        type="submit"
-                                        disabled={isSubmitting}
-                                        className="w-full mt-2 flex items-center justify-center gap-2 py-4 px-4 bg-color-lime-green hover:bg-[#8ee015] text-color-deep-purple-900 rounded-xl font-extrabold text-lg transition-all shadow-[0_0_20px_rgba(163,230,53,0.3)] hover:shadow-[0_0_30px_rgba(163,230,53,0.5)] active:scale-95 group disabled:opacity-70 disabled:cursor-not-allowed"
+                                        onClick={onRestart}
+                                        className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-white/10 hover:bg-white/20 text-white rounded-xl font-bold transition-all border border-white/10 hover:border-white/30"
                                     >
-                                        <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                        {isSubmitting ? "Submitting..." : "Submit to Waitlist"}
+                                        <RotateCcw className="w-4 h-4" />
+                                        Play Again
                                     </button>
-                                </form>
+                                    <button
+                                        onClick={onExit}
+                                        className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-color-deep-purple-600 hover:bg-color-deep-purple-500 text-white rounded-xl font-bold transition-all shadow-lg"
+                                    >
+                                        <Home className="w-4 h-4" />
+                                        Back to Lobby
+                                    </button>
+                                </div>
                             </>
                         ) : (
                             <div className="text-center py-8">
